@@ -23,7 +23,7 @@ define([
 			    x = Math.floor((e.pageX - offset.left) / tw),
 			    y = Math.floor((e.pageY - offset.top) / th);
 
-			$("#canvas .selection").css({
+			$("#canvas").find(".selection").css({
 				top: y * th,
 				left: x * tw
 			});
@@ -63,8 +63,8 @@ define([
 		    lx = ex-sx,
 		    ly = ey-sy,
 
-		    bgx = parseInt($("#canvas .selection").css("background-position").split(" ")[0], 10),
-		    bgy = parseInt($("#canvas .selection").css("background-position").split(" ")[1], 10),
+		    bgx = parseInt($("#canvas").find(".selection").css("background-position").split(" ")[0], 10),
+		    bgy = parseInt($("#canvas").find(".selection").css("background-position").split(" ")[1], 10),
 
 		    pos_x, pos_y, coords,
 		    $div, exists, x, y, query;
@@ -73,8 +73,8 @@ define([
 			$(layer.elem).addClass("ts_" + tileset.id);
 			$(layer.elem).attr("data-tileset", tileset.name);
 		} else if ($(layer.elem).attr("data-tileset") != tileset.name) {
-			if (!$("#canvas .warning:visible").length)
-			{ $("#canvas .warning").html("Cannot use different tilesets on one layer, please clear the layer first.").show().delay(2000).fadeOut(1000); }
+			if (!$("#canvas").find(".warning:visible").length)
+			{ $("#canvas").find(".warning").html("Cannot use different tilesets on one layer, please clear the layer first.").show().delay(2000).fadeOut(1000); }
 			return;
 		}
 
@@ -126,8 +126,8 @@ define([
 		bfr.fillRect(tw-1, 0, 1, th);
 
 		$("#canvas").css("backgroundImage", "url(" + buffer.toDataURL() + ")");
-		$("#canvas .selection").css("width", tw);
-		$("#canvas .selection").css("height", th);
+		$("#canvas").find(".selection").css("width", tw);
+		$("#canvas").find(".selection").css("height", th);
 	};
 
 	return Canvas;

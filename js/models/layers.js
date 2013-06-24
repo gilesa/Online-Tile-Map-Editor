@@ -9,7 +9,7 @@ define(["jquery-ui"], function($) {
 		// Layer UI functionality
 		$("#layerlist").on("mousedown", "li", function(e) {
 			
-			$("#layerlist li").removeClass("active");
+			$("#layerlist").find("li").removeClass("active");
 			$(e.currentTarget).addClass("active");
 
 		})
@@ -44,7 +44,7 @@ define(["jquery-ui"], function($) {
 
 	Layers.add = function(e, name) {
 
-		var id = $("#layerlist li").length;
+		var id = $("#layerlist").find("li").length;
 
 		if (!name) { name = window.prompt("Layer name: (a-z, A-Z, _, -)"); }
 		if (!name || !name.match(/^[a-zA-Z_-][a-zA-Z0-9_-]{2,}$/)) {
@@ -52,7 +52,7 @@ define(["jquery-ui"], function($) {
 			return;
 		}
 
-		$("#layerlist li").removeClass("active");
+		$("#layerlist").find("li").removeClass("active");
 		$("#layerlist").append("<li class='active' data-id='" + id + "'><span class='icon-eye-open'></span> " + name + "<span class='icon-cog'></span></li>");
 		$("#layerlist").sortable("refresh");
 		$("#tiles").append("<div class='layer' data-name='" + name + "' data-id='" + id + "'></div>");
@@ -66,7 +66,7 @@ define(["jquery-ui"], function($) {
 		if (confirm("Remove \"" + name + "\" ?")) {
 
 			// TODO make this possible?
-			if ($("#layerlist li").length == 1) {
+			if ($("#layerlist").find("li").length == 1) {
 				alert("Cannot remove last layer!");
 				return;
 			}
@@ -109,10 +109,10 @@ define(["jquery-ui"], function($) {
 
 	Layers.get_active = function() {
 
-		var id = $("#layerlist li.active").attr("data-id");
+		var id = $("#layerlist").find("li.active").attr("data-id");
 
 		return { 
-			id: $("#layerlist li.active").attr("data-id"),
+			id: id,
 			elem: $(".layer[data-id=" + id + "]")[0]
 		}
 	};
@@ -122,7 +122,7 @@ define(["jquery-ui"], function($) {
 
 		var id, drag_name = ui ? $(ui.item).children().val() : "";
 
-		$("#layerlist li").each(function(i) {
+		$("#layerlist").find("li").each(function(i) {
 			id = $(this).attr("data-id");
 			$(".layer[data-id=" + id + "]").css("z-index", i);
 		});

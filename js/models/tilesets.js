@@ -38,8 +38,8 @@ define([
 			height: tileset.height,
 		}).attr("class", "ts_" + tileset.id);
 
-		$("#tilesets select").val(name);
-		$("#tilesets .loading").remove();
+		$("#tilesets").find("select").val(name);
+		$("#tilesets").find(".loading").remove();
 		this.update_selection();
 	}
 
@@ -82,8 +82,8 @@ define([
 
 			$(style).append(css);
 			$("head").append(style);
-			$("#tilesets select").append("<option>" + name + "</option>");
-			$("#tilesets select").val(name);
+			$("#tilesets").find("select").append("<option>" + name + "</option>");
+			$("#tilesets").find("select").val(name);
 			$("#tileset").jScrollPane();
 			Editor.Canvas.update_grid();
 
@@ -156,13 +156,13 @@ define([
 	};
 
 	Tilesets.update_selection = function() {
-		$("#canvas .selection").attr("class", "selection");
-		$("#tileset .selection").remove();
+		$("#canvas").find(".selection").attr("class", "selection");
+		$("#tileset").find(".selection").remove();
 		Editor.selection = null;
 	};
 
 
-	Tilesets.get_active = function() { return Tilesets.collection[$("#tilesets select option:selected").val()]; }
+	Tilesets.get_active = function() { return Tilesets.collection[$("#tilesets").find("option:selected").val()]; }
 
 	return Tilesets;
 });

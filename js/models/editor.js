@@ -33,15 +33,15 @@ define([
 		});
 
 		// Menubar interaction
-		$("#menubar > li").on("click mouseover", function(e) {
-			if (e.type == "mouseover" && !$("#menubar > li.open").length) { return; }
-			$("#menubar > li").removeClass("open");
+		$("#menubar").on("click mouseover", "li", function(e) {
+			if (e.type == "mouseover" && !$("#menubar").find("li.open").length) { return; }
+			$("#menubar").find("li").removeClass("open");
 			$(e.currentTarget).addClass("open");
 		});
 
 		$("body").on("mousedown", function(e) {
 			if (!$("#menubar").find(e.target).length) {
-				$("#menubar > li").removeClass("open");
+				$("#menubar").find("li").removeClass("open");
 			}
 		});
 
